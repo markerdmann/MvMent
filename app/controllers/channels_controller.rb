@@ -83,7 +83,7 @@ class ChannelsController < ApplicationController
   
   def subscribe
     @channel = Channel.find(params[:id])
-    @channel.subscriptions.create(:user_id => current_user)
+    @channel.subscriptions.create(:user_id => current_user.id)
     
     respond_to do |format|
       format.html { redirect_to :root }#channels_url }
