@@ -1,0 +1,78 @@
+<h1>Your Feed</h1>
+
+<table>
+  <tr>
+    <th>Message</th>
+    <th>Posted At</th>
+    <th>Channel</th>
+  </tr>
+
+<% @posts.each do |post| %>
+  <tr>
+    <td><%= post.content %></td>
+    <td><%= post.created_at %></td>
+    <td><%= post.name %></td>
+  </tr>
+<% end %>
+</table>
+    
+<h1>All Channels</h1>
+
+<table>
+  <tr>
+    <th>Name</th>
+    <th></th>
+  </tr>
+
+<% @channels.each do |channel| %>
+  <tr>
+    <td><%= channel.name %></td>
+    <td><a href="/channels/<%= channel.id %>/subscribe">Subscribe</a></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<h1>Your Channels</h1>
+
+  <table>
+    <tr>
+      <th>Name</th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+
+  <% @your_channels.each do |channel| %>
+    <tr>
+      <td><%= channel.name %></td>
+      <td><%= link_to 'New Post', new_channel_post_path(channel) %></td>
+      <td><%= link_to 'Edit', edit_channel_path(channel) %></td>
+      <td><%= link_to 'Destroy', channel, confirm: 'Are you sure?', method: :delete %></td>
+    </tr>
+  <% end %>
+  </table>
+
+  <%= link_to 'New Channel', new_channel_path %>
+  
+  <br />
+  <br />
+  
+<h1>Your Subscriptions</h1>
+
+  <table>
+    <tr>
+      <th>Name</th>
+      <th></th>
+    </tr>
+
+  <% @subscriptions.each do |subscription| %>
+    <tr>
+      <td><%= subscription.channel_name %></td>
+      <td><a href="/channels/<%= subscription.channel_id %>/unsubscribe">Unsubscribe</a></td>
+    </tr>
+  <% end %>
+  </table>
+
+  <br />
